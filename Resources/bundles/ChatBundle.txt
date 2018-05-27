@@ -1,0 +1,2 @@
+//font
+FONT,ChatFont,arial.ttf,12

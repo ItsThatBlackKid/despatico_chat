@@ -1,0 +1,40 @@
+x:0
+y:0
+w:600
+h:500
+d:false
+v:true
+
+//list of messages
+
+
+
+//Format: r:x,y,w,h,kind
+//send message area
+r:0, 470, 350, 29, TextBox, messageBox, ChatFont, 456, l, Enter message here.
+r:355, 470, 45, 29, Button, SendButton
+r:355, 470, 45, 29, Label, SendButtonLabel, ChatFont, c, Send!
+
+//Host IP and Port textboxes
+r:405,425, 80, 20, TextBox, hostBox, ChatFont, 20, c, Input HOST
+r:500,425, 80, 20,TextBox, portBox, ChatFont, 20, c, Input PORT
+
+//Username box
+r:405,400,185,20, TextBox,usernameBox,ChatFont,20,c, Enter username
+
+//Host Button
+r:405,450,80, 20, Button, HostButton
+r:405,450,80,20, Label, HostButtonLabel, ChatFont, c, Host
+
+//connect button
+r:500,450,80, 20, Button, ConnectButton
+r:500,450,80,20, Label, ConnectButtonLabel, ChatFont, c, Connect
+
+//Notice label
+r:405,475,185,20, Label, NoticeLabel, ChatFont, c, Notices appear here
+
+
+//connected peers list
+r:405, 0, 194, 380, List, ConnectionList, 1,10, -1, ChatFont, c, 10, v, n
+//Received Messages
+r:0, 0, 400, 470, List, MessagesList, 1,10,-1,ChatFont,l,4,v,n

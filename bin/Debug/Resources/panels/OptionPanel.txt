@@ -1,0 +1,19 @@
+x:400
+y:0
+w:200
+h:450
+d:false
+v:true
+
+
+//Host Button
+r:400,400,40, 30, Button, HostButton
+r:400,400,40,30, Label, HostButtonLabel, ChatFont, c, Host
+
+//connect button
+r:445,400,40, 30, Button, ConnectButton
+r:445,400,40,30, Label, ConnectButtonLabel, ChatFont, c, Connect
+
+//connected peers list
+r:400, 0, 190, 400, List, ConnectionList, 1,10, -1, ChatFont, c, 10, v, n
+
