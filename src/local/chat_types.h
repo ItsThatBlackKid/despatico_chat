@@ -19,6 +19,8 @@ typedef struct user_t {
 typedef vec_t(user) user_array;
 #define DESPACITOCHAT_CHAT_TYPES_H
 
+
+
 #endif //DESPACITOCHAT_CHAT_TYPES_H
 
 

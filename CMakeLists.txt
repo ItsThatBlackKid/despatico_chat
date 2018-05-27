@@ -13,4 +13,4 @@ add_executable(command_test tests/command_tests.c src/local/helper.c
 ]]
 
 add_executable(DespacitoChat src/main.c src/local/helper.c src/local/helper.h
-       src/local/commands.c src/local/commands.h src/local/chat_types.h)
+       src/local/commands.c src/local/commands.h src/local/chat_types.h src/local/server.c src/local/server.h src/local/client.h src/local/client.c src/local/management.c src/local/management.h)

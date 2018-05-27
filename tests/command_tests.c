@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include <commands.h>
-#include <helper.h>
 
 
 int main() {

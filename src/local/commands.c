@@ -1,18 +1,28 @@
 //
 // Created by sheku on 25/05/2018.
 //
-#include <ctype.h>
+
 #include "commands.h"
 
 
 bool message_is_command(const char *message) {
     bool is_command = false;
     char com_op = '!';
-    if(com_op == message[0]) {
+    if(com_op == message[0] && message[1]) {
         is_command = true;
     }
 
     return is_command;
+}
+
+//user commands are read only by the host
+bool is_user_command(const char *message){
+    bool is_user_command = false;
+    if(message_is_command(message) && message[1] == 'u') {
+        is_user_command = true;
+    }
+
+    return  is_user_command;
 }
 
 command tokenize(char* input) {
@@ -38,6 +48,7 @@ user tokenise_user(char *input) {
     char to_parse[256] = {0};
     strcpy(to_parse,input);
     char *pch;
+    //read the [username] part of the command
     pch = strtok(to_parse, " ");
 
     user parsed_user;
@@ -48,6 +59,7 @@ user tokenise_user(char *input) {
     parsed_user.username =username;
 
     char *ip_addr;
+    //read the [ip_addr] part of the command
     pch = strtok(NULL, " ");
     strcpy_ukwn(pch,&ip_addr);
 
@@ -72,9 +84,23 @@ void parse_whisper_command(char **comm_value) {
 }
 
 user parse_command_user(char *input) {
+    /*
+     * User command syntax:
+     * !user [username] [ip_addr]
+     */
+
     command user_command = tokenize(input);
     user result =tokenise_user(user_command.value);
     return result;
+}
+
+user user_to_command(user to_convert) {
+    user converted_user;
+
+    strcpy_ukwn(to_convert.username,converted_user.username);
+    strcpy_ukwn(to_convert.username,converted_user.ip_addr);
+
+    return converted_user;
 }
 
 
@@ -92,3 +118,4 @@ char *parse_command(char *input) {
 
     return token.value;
 }
+
