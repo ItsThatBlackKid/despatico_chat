@@ -24,26 +24,9 @@ void show_connected_user(panel chat, user connected_user) {
     guilist list = list_from_region(r);
     char *username = connected_user.username;
     add_item_by_text(list, username);
-}
-
-void show_connected_users(user_array users) {
-    panel c_panel = load_panel("ChatArea.txt");
-    user detail;
-    int i = 0;
-    vec_foreach(&users, detail, i) {
-            show_connected_user(c_panel,detail);
-        }
-
-}
-
-char *get_ip_str(uint32_t ip_dec) {
-    char *hex_str;
-    dec_to_hex(ip_dec, hex_str);
-    char *hex;
-
-    char *ip_str;
-    hex_str_to_ipv4(hex_str, ip_str);
-    return ip_str;
+    draw_interface();
+    update_interface();
+    refresh_screen();
 }
 
 char *get_own_ip(connection self) {
@@ -55,30 +38,19 @@ char *get_own_ip(connection self) {
     return ip_str;
 }
 
-char *get_user_ip(int user_index) {
-    connection user = retreive_connection(user_index);
-    uint32_t ip_dec = connection_ip(user);
-
-    //proceeding code took me 4 hours to figure out...
-    char ip_str[26] = {0};
-    char *str = (char *) malloc(strlen(ip_str) + 1);
-
-    int_to_ip(ip_dec, ip_str);
-    strcpy(str, ip_str);
-
-    return str;
-}
-
-
-char *get_user_details(user user_detail) {
-    char result[456] = {0};
-    sprintf(result, "%s %s", user_detail.username, user_detail.ip_addr);
-    char *true_result;
-    strcpy_ukwn(result,&true_result);
-    return true_result;
-}
 
 void sign_name(char *name, char *to_sign) {
-    prepend(name,to_sign);
+    append_char(to_sign, ':');
+    append_char(to_sign,' ');
+    prepend(to_sign,name);
+}
+
+bool username_set() {
+    guitextbox ubox = text_box_from_id("UsernameBox");
+    if(strcmp(ubox->content_string, "Enter username") == 0 || strcmp(ubox->content_string, " ") == 0) {
+        return  false;
+    }
+
+    return  true;
 }
 

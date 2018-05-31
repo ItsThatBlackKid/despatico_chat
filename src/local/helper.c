@@ -23,7 +23,6 @@ unsigned int strtouint(char *st) {
  *
  */
 void strcpy_ukwn(char *src, char **dest) {
-    memset(*dest, 0, strlen(*dest));
     *dest = (char *) malloc(strlen(src) + 1);
     strcpy(*dest, src);
 }
@@ -38,35 +37,9 @@ void int_to_ip(uint32_t ip, char *result) {
     unsigned char bytes[4];
 
     for (int i = 0; i < 4; i++) {
-        bytes[i] = (ip >> (i * 8) & 0XFF);
+        bytes[i] = (unsigned char) (ip >> (i * 8) & 0XFF);
     }
     sprintf(result, "%d.%d.%d.%d", bytes[3], bytes[2], bytes[1], bytes[0]);
-}
-
-char *multi_tok(char *input, char *delimiter) {
-    char *string;
-    if (input != NULL) {
-        string = input;
-        printf("%s\n", string);
-    }
-
-
-    if (string == NULL)
-        return string;
-
-    char *val = strstr(string, delimiter);
-    printf("val: %s\n", val);
-    if (val == NULL) {
-        char *temp = string;
-        string = NULL;
-        return temp;
-    }
-
-
-    *val = '\0';
-    string = val + strlen(delimiter);
-    char *temp = string;
-    return temp;
 }
 
 //thank you https://gist.github.com/bg5sbk/11058000
@@ -97,19 +70,19 @@ char *_replace_substr(const char *string, const char *substr, const char *replac
         }
 
         memcpy(newstr, oldstr, tok - oldstr);
-        memcpy(newstr + (tok - oldstr), replacement, replacement_len);
+        memcpy(newstr + (tok - oldstr), replacement, (size_t) replacement_len);
         memcpy(newstr + (tok - oldstr) + replacement_len, tok + substr_len, oldstr_len - substr_len - (tok - oldstr));
         memset(newstr + oldstr_len - substr_len + replacement_len, 0, 1);
 
         free(oldstr);
     }
 
-    free(string);
+    free((void *) string);
 
     return newstr;
 }
 
-char **permute(char *input) {
+/*char **permute(char *input) {
     int n = strlen(input);
     int max_perms = 1 << n;
 
@@ -128,6 +101,13 @@ char **permute(char *input) {
     free(&max_perms);
 
     return combinations;
+}*/
+
+void append_char(char *orig, char to_append) {
+   size_t len = strlen(orig);
+   orig[len] = to_append;
+   orig[len +1] ='\0';
+
 }
 
 void prepend(char *to_prepend, char *orig) {
@@ -155,7 +135,6 @@ char *filter_language(const char *orig) {
             "bastard",
     };
 
-    printf("filtering language\n");
     char *result = _replace_substr(orig, swear_words[0], "DESPACITO");
 
     for (int i = 1; i < 10; i++) {
@@ -163,7 +142,6 @@ char *filter_language(const char *orig) {
         printf("%s", result);
     }
 
-    printf("message filtered\n");
 
     return result;
 }

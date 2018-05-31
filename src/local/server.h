@@ -11,10 +11,6 @@
 #include "SwinGame.h"
 
 void send_message_host(char message[456]);
-void listen_for_command(connection sock);
 void host_listen_for_message(connection peer);
 connection connect_as_host(int port);
-
-user get_new_user_details(char message[456]);
-
 #endif //DESPACITOCHAT_SERVER_H

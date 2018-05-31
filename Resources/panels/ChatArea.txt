@@ -20,7 +20,7 @@ r:405,425, 80, 20, TextBox, hostBox, ChatFont, 20, c, Input HOST
 r:500,425, 80, 20,TextBox, portBox, ChatFont, 20, c, Input PORT
 
 //Username box
-r:405,400,185,20, TextBox,usernameBox,ChatFont,20,c, Enter username
+r:405,400,185,20, TextBox,UsernameBox,ChatFont,20,c, Enter username
 
 //Host Button
 r:405,450,80, 20, Button, HostButton

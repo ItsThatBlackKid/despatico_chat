@@ -12,6 +12,8 @@
 int main() {
     printf("Hello world\n");
 
+    printf("%s\n", parse_command("!shout hello world"));
+
 /*    printf("%s\n",parse_command("!shout hello world"));
     printf("%s\n",parse_command("!yell oi MATE"));
     printf("%s\n",parse_command("!whisper HeYY"));
@@ -20,11 +22,11 @@ int main() {
 
     printf("username: %s ip:%s",me.username,me.ip_addr);*/
 
-    char *to_filer = "fucking asshole cunt I fucking hate you bitch! mate";
-    printf("before filter: %s\n",to_filer);
-    char *new = filter_language(to_filer);
+    /* char *to_filer = "fucking asshole cunt I fucking hate you bitch! mate";
+     printf("before filter: %s\n",to_filer);
+     char *new = filter_language(to_filer);*/
 
-   // printf("after filter: %s", new);
+    // printf("after filter: %s", new);
 
     return 0;
 }

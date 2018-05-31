@@ -21,7 +21,7 @@ command tokenize(char *input);
 
 user parse_command_user(char *input);
 
-user user_to_command(user to_conert);
+char* user_to_command(user to_conert);
 
 char *parse_command(char *input);
 

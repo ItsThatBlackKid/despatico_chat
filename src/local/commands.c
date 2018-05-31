@@ -6,21 +6,15 @@
 
 
 bool message_is_command(const char *message) {
-    bool is_command = false;
     char com_op = '!';
-    if(com_op == message[0] && message[1]) {
-        is_command = true;
-    }
+    bool is_command = (com_op == message[0]) ? true : false; //C has SHORTHANDS!!!
 
     return is_command;
 }
 
 //user commands are read only by the host
 bool is_user_command(const char *message){
-    bool is_user_command = false;
-    if(message_is_command(message) && message[1] == 'u') {
-        is_user_command = true;
-    }
+    bool is_user_command = (message_is_command(message) && message[1] == 'u') ?  true: false;
 
     return  is_user_command;
 }
@@ -34,12 +28,14 @@ command tokenize(char* input) {
     command tokenized;
     char *type;
     strcpy_ukwn(pch,&type);
+    printf("type: %s",type);
     tokenized.type = type;
 
     pch = strtok(NULL, "");
     char *value;
     strcpy_ukwn(pch,&value);
     tokenized.value = value;
+    printf("value: %s", tokenized.value);
 
     return tokenized;
 }
@@ -90,17 +86,23 @@ user parse_command_user(char *input) {
      */
 
     command user_command = tokenize(input);
+    printf("tokenised input\n");
     user result =tokenise_user(user_command.value);
     return result;
 }
 
-user user_to_command(user to_convert) {
-    user converted_user;
+char* user_to_command(user to_convert) {
+    char username[50];
+    char ip[50];
+    char result[456] = {0};
+    char *user_str;
+    strcpy(username,to_convert.username);
+    strcpy(ip,to_convert.ip_addr);
 
-    strcpy_ukwn(to_convert.username,converted_user.username);
-    strcpy_ukwn(to_convert.username,converted_user.ip_addr);
+    sprintf(result, "!user %s %s",to_convert.username,to_convert.ip_addr);
+    strcpy_ukwn(result,&user_str);
 
-    return converted_user;
+    return user_str;
 }
 
 
