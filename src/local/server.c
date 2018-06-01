@@ -5,10 +5,16 @@
 
 void send_message_host(char message[456]) {
     show_notice("Sending message");
-    broadcast_tcpmessage(message);
-    show_message(message);
-
+    if(message_is_command(message)) {
+        char *com_val = parse_command(message);
+        show_message(com_val);
+        broadcast_tcpmessage(com_val);
+    } else {
+        broadcast_tcpmessage(message);
+        show_message(message);
+    }
     show_notice("Message Sent");
+
 }
 
 void relay_message(char *message) {
@@ -22,11 +28,7 @@ void host_listen_for_message(connection peer) {
     char received_message[456];
     if (tcpmessage_received()) {
         read_message(peer, received_message);
-        if (message_is_command(received_message) && !is_user_command(received_message)) {
-            char *com_val = parse_command(received_message);
-            show_message(com_val);
-            broadcast_tcpmessage(received_message);
-        } else if (is_user_command(received_message)) {
+     if (is_user_command(received_message)) {
             //read the user, broadcast
             user parsed = parse_command_user(received_message);
             panel m_pane = load_panel("ChatArea.txt");

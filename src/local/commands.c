@@ -28,14 +28,12 @@ command tokenize(char* input) {
     command tokenized;
     char *type;
     strcpy_ukwn(pch,&type);
-    printf("type: %s",type);
     tokenized.type = type;
 
     pch = strtok(NULL, "");
     char *value;
     strcpy_ukwn(pch,&value);
     tokenized.value = value;
-    printf("value: %s", tokenized.value);
 
     return tokenized;
 }

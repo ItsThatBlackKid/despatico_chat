@@ -28,5 +28,9 @@ int main() {
 
     // printf("after filter: %s", new);
 
+    char my_message[456] = "jake:Hello fuck";
+    char *new_m = filter_language(my_message);
+    printf("%s\n",new_m);
+
     return 0;
 }

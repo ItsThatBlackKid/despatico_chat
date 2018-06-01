@@ -120,7 +120,12 @@ void prepend(char *to_prepend, char *orig) {
     }
 }
 
+
+
 char *filter_language(const char *orig) {
+    //TODO all case permutations of words
+    //TODO read swear words from a file. tired of hardcoding
+
     const char *swear_words[11] = {
             "asshole",
             "bitch",
@@ -139,7 +144,6 @@ char *filter_language(const char *orig) {
 
     for (int i = 1; i < 10; i++) {
         result = _replace_substr(result, swear_words[i], "DESPACITO");
-        printf("%s", result);
     }
 
 
