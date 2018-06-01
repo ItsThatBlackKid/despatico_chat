@@ -12,14 +12,14 @@ void send_message(char message[456], connection peer) {
     show_notice("Sending message");
     if(message_is_command(message)) {
         char *com_val = parse_command(message);
-        printf("parsed command\n");
         sign_name(com_val,name);
         send_tcpmessage(com_val,peer);
         show_message(com_val);
     } else {
-        sign_name(message,name);
-        send_tcpmessage(message,peer);
-        show_message(message);
+        char *filtered = filter_language(message);
+        sign_name(filtered,name);
+        send_tcpmessage(filtered,peer);
+        show_message(filtered);
     }
 
     show_notice("Message sent");
@@ -52,8 +52,6 @@ void listen_for_message(connection peer) {
         }
 
         if(!is_user_command(received_message)) {
-            printf("message not user\n");
-
             char *filtered_message = filter_language(received_message);
             show_message(filtered_message);
         } else {

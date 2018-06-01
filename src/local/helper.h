@@ -19,6 +19,8 @@ void strcpy_kwn(char *src, char **dest);
 
 void int_to_ip(uint32_t ip, char *result);
 
+char** permute(char *input);
+
 void append_char(char *orig, char to_append);
 
 void prepend(char *to_prepend, char *orig);

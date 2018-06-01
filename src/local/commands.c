@@ -2,6 +2,10 @@
 // Created by sheku on 25/05/2018.
 //
 
+//Command syntax:
+//![type] [value]
+//eg: !shout hello world
+
 #include "commands.h"
 
 

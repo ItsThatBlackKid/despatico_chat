@@ -77,31 +77,31 @@ char *_replace_substr(const char *string, const char *substr, const char *replac
         free(oldstr);
     }
 
-    free((void *) string);
 
     return newstr;
 }
 
-/*char **permute(char *input) {
+char** permute(char *input) {
+
     int n = strlen(input);
     int max_perms = 1 << n;
 
     char *lwr = strlwr(input);
-    char **combinations = malloc(max_perms * sizeof(char *));
-    printf("size: %d", sizeof(combinations));
-    for (int i = 0; i < max_perms; i++) {
-        combinations[i] = malloc(strlen(lwr) + 1);
-        for (int j = 0; j < n; j++) {
-            if (((i >> j) & 1) == 1)combinations[i][j] = toupper(lwr);
+    char combinations[max_perms][sizeof(n)+1];
+    char **combos = (char**) malloc((max_perms + 1) * sizeof(char *));
+
+    for(int i = 0; i < max_perms; i++) {
+        combos[i] = (char*)malloc(sizeof(input)+1);
+        strcpy(combos[i],input);
+        for(int j = 0; j < n; j++) {
+            if(((i >> j) & 1) == 1) {
+                combos[i][j] = (char) toupper(lwr[j]);
+            }
         }
-        printf("%s", combinations[i]);
     }
 
-    free(&n);
-    free(&max_perms);
-
-    return combinations;
-}*/
+    return combos;
+}
 
 void append_char(char *orig, char to_append) {
    size_t len = strlen(orig);
@@ -126,7 +126,7 @@ char *filter_language(const char *orig) {
     //TODO all case permutations of words
     //TODO read swear words from a file. tired of hardcoding
 
-    const char *swear_words[11] = {
+     char *swear_words[11] = {
             "asshole",
             "bitch",
             "cunt",
@@ -140,12 +140,21 @@ char *filter_language(const char *orig) {
             "bastard",
     };
 
-    char *result = _replace_substr(orig, swear_words[0], "DESPACITO");
+     char *result;
+
+     char **perm = permute(swear_words[0]);
+     for(int i = 0; i < (1 <<strlen(swear_words[0]));i++) {
+         result = _replace_substr(orig, perm[i],"DESPACITO");
+         if(strcmp(orig,result) !=0) break;
+     }
 
     for (int i = 1; i < 10; i++) {
-        result = _replace_substr(result, swear_words[i], "DESPACITO");
-    }
+        char **permutation = permute(swear_words[i]);
 
+        for(int j = 0; j < (1 << strlen(swear_words[i])); j++) {
+            result = _replace_substr(result, permutation[j], "DESPACITO");
+        }
+    }
 
     return result;
 }

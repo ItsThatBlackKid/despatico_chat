@@ -5,13 +5,14 @@
 
 void send_message_host(char message[456]) {
     show_notice("Sending message");
-    if(message_is_command(message)) {
+    if (message_is_command(message)) {
         char *com_val = parse_command(message);
         show_message(com_val);
         broadcast_tcpmessage(com_val);
     } else {
-        broadcast_tcpmessage(message);
-        show_message(message);
+        char *filtered = filter_language(message);
+        broadcast_tcpmessage(filtered);
+        show_message(filtered);
     }
     show_notice("Message Sent");
 
@@ -28,7 +29,7 @@ void host_listen_for_message(connection peer) {
     char received_message[456];
     if (tcpmessage_received()) {
         read_message(peer, received_message);
-     if (is_user_command(received_message)) {
+        if (is_user_command(received_message)) {
             //read the user, broadcast
             user parsed = parse_command_user(received_message);
             panel m_pane = load_panel("ChatArea.txt");
@@ -36,8 +37,9 @@ void host_listen_for_message(connection peer) {
             broadcast_tcpmessage(received_message);
 
         } else {
-            show_message(received_message);
-            broadcast_tcpmessage(received_message);
+            char *filtered = filter_language(received_message);
+            show_message(filtered);
+            broadcast_tcpmessage(filtered);
         }
 
     }
