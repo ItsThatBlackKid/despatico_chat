@@ -51,17 +51,12 @@ void run_program() {
             if (portnum == 0L) {
                 show_notice("You must enter a port NUMBER");
             } else {
-
-
                 peer = connect_as_host(portnum);
 
                 is_connected = true;
                 is_host = true;
                 show_notice("You are the host");
 
-              /*  char *init_com = read_init_command(peer);
-                user connected_user = get_new_user(init_com);
-                vec_push(&connected_users, connected_user);*/
             }
 
         } else if (button_named_clicked("ConnectButton")) {

@@ -27,9 +27,11 @@ int main() {
      char *new = filter_language(to_filer);*/
 
     // printf("after filter: %s", new);
-
+/*
     char unfiltered[] = "Hello AssHOle CuNt";
-    char *filtered = filter_language(unfiltered);
+    char *filtered = filter_language(unfiltered);*/
+
+char username[456]
 
     printf("%s", filtered);
     return 0;

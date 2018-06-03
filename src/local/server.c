@@ -18,12 +18,6 @@ void send_message_host(char message[456]) {
 
 }
 
-void relay_message(char *message) {
-    if (accept_tcpconnection() > 1) {
-        broadcast_tcpmessage(message);
-    }
-}
-
 
 void host_listen_for_message(connection peer) {
     char received_message[456];

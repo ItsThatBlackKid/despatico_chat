@@ -32,9 +32,10 @@ void send_init_msg(char message[456], connection peer) {
 }
 
 bool is_own_message(const char *received_message) {
+    printf("%s", received_message);
     char name[300];
     textbox_text_with_id("UsernameBox",name);
-    char to_check[strlen(name)];
+    char to_check[300] = {0};
     strncpy(to_check,received_message,strlen(name));
 
     return strcmp(to_check,name) ==0;

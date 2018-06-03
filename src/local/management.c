@@ -22,8 +22,9 @@ void show_message(char message[456]) {
 void show_connected_user(panel chat, user connected_user) {
     region r = region_with_id(chat, "ConnectionList");
     guilist list = list_from_region(r);
-    char *username = connected_user.username;
-    add_item_by_text(list, username);
+    char to_show[456];
+    sprintf(to_show,"%s:%s",connected_user.username,connected_user.ip_addr);
+    add_item_by_text(list, to_show);
     draw_interface();
     update_interface();
     refresh_screen();
